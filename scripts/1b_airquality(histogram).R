@@ -42,3 +42,24 @@ ggplot(
      y = "Range" ) +
  
   theme_light()
+
+#Enchanced by adding subtitle and captions
+ggplot(
+  airquality,
+  aes(x=Temp)
+)+
+  geom_histogram(
+    bins = 12,
+    fill = "lightblue",
+    col = "darkblue")+
+  labs(
+    title= "GGPLOT- Histogram for Air Quality",
+    subtitle = "La Guardia Airport, New York (May–September 1973)",
+    caption = "Source: R built-in dataset 'airquality'",
+    x = "Temperature",
+    y = "Range" ) +
+  
+  theme_light()
+
+
+help("labs")
