@@ -26,3 +26,19 @@ ggplot(
 )+
   geom_histogram() +
   theme_light()
+
+# Adding title , colours and lables
+ggplot(
+  airquality,
+  aes(x=Temp)
+)+
+  geom_histogram(
+    bins = 12,
+    fill = "lightblue",
+    col = "darkblue")+
+   labs(
+     title= "GGPLOT- Histogram for Air Quality",
+     x = "Temperature",
+     y = "Range" ) +
+ 
+  theme_light()
