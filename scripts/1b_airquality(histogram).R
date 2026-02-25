@@ -15,3 +15,14 @@ hist(airquality$Temp,
      labels=TRUE,
      col = "lightblue",
      border = "darkblue")
+
+#plottting histogram using GGPLOT2
+
+#basic histogram using ggplot
+library(ggplot2)
+ggplot(
+  airquality,
+  aes(x=Temp)
+)+
+  geom_histogram() +
+  theme_light()
