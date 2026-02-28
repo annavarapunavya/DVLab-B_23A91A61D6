@@ -57,6 +57,6 @@ ggplot(iris,aes(x=Species,y=Sepal.Length,fill=Species))+
     values = c(
       "setosa" = "red",
       "versicolor" = "green",
-      "viginica" = "blue"
+      "viginica" = "steelblue"
     )
   )
