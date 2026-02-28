@@ -45,7 +45,17 @@ ggplot(diamonds,aes(carat,price)) +
   scale_fill_viridis_b()+
   theme_minimal()
 
-#
+#Add legend title
+ggplot(diamonds,aes(carat,price)) + geom_hex(bins=20) +
+  scale_fill_viridis_c(name="Count") +
+  theme_minimal()
 
+#Faceted hexbin
+ggplot(diamonds,aes(carat,price)) + geom_hex() +scale_fill_viridis_c() +
+  facet_wrap(~cut) +
+  theme_minimal()
 
-
+#Log scale hexbin
+ggplot(diamonds,aes(carat,price)) + geom_hex() + scale_fill_viridis_c()+
+  scale_y_log10()+
+  theme_minimal()
