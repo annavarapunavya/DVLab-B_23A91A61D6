@@ -1,92 +1,62 @@
-# Load ggplot2
-library(ggplot2)
+#Load the data
+data(iris)
 
+#Understand the data
+str(iris)
+View(iris)
+class(iris)
+?iris
 
-# Count bar chart
-ggplot(iris, aes(x = Species)) +
-  geom_bar()
-# ggplot counts automatically
+#Basic Box Point
+boxplot(iris$Sepal.Length)
 
+#Add the Title&Labels
+boxplot(iris$Sepal.Length,
+        main="Box plot for Sepal Length",
+        ylab = "Sepal_Length",
+        col = 'skyblue')
 
-# LAYER 7: STYLED BAR CHART (ggplot2)
-ggplot(iris, aes(x = Species)) +
-  geom_bar(fill = "steelblue") +
-  labs(
-    title = "Distribution of Iris Species",
-    y = "Count"
-  ) +
-  theme_minimal()
+#Grouped Box plot(by species)
+boxplot(Sepal.Length~Species,
+        data = iris,
+        main = "Speal.Length by Species",
+        xlab = "Species",
+        ylab = "Sepal Length",
+        col = c('blue','black','violet'))
+#Multi-Variable Box Plot
+boxplot(iris[,1:4],
+        main = "Multi Variable Box Plot",
+        col = c('pink','green','skyblue','orange'))
 
-
-# LAYER 8: BAR CHART WITH AGGREGATION (ggplot2)
-
-# Mean Sepal Length per Species
-ggplot(iris, aes(x = Species, y = Sepal.Length)) +
-  stat_summary(
-    fun = mean,
-    geom = "bar",
-    fill = "orange"
-  ) +
-  labs(
-    title = "Mean Sepal Length by Species",
-    y = "Mean Sepal Length"
-  ) +
-  theme_minimal()
-# stat_summary() performs aggregation
-
-
-
-# LAYER 9: GROUPED BAR CHART (ggplot2)
-ggplot(iris, aes(x = Species, fill = Species)) +
-  geom_bar(position = "dodge") +
-  theme_minimal()
-
-# Or with aggregated values:
-ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
-  stat_summary(
-    fun = mean,
-    geom = "bar",
-    position = "dodge"
-  ) +
-  theme_minimal()
-# Easy comparison across categories
-
-
-# LAYER 10: STACKED BAR CHART (ggplot2)
-# Count-based stacked bar chart
-ggplot(iris, aes(x = Species, fill = Species)) +
-  geom_bar(position = "stack") +
-  theme_minimal()
-
-
-# Stacked bar with another categorical variable (example)
-ggplot(iris, aes(x = Species, fill = cut(Sepal.Length,50))) +
-  geom_bar(position = "stack") +
-  labs(fill = "Sepal Length Group") +
-  theme_minimal()
-# Shows sub-category composition
-
-
-
-# Or with aggregated values:
-library(tidyr)
-
-iris_long <- pivot_longer(
-  iris,
-  cols = c(Sepal.Length, Petal.Length),
-  names_to = "Measurement",
-  values_to = "Value"
+#Using Custom color Palette
+species_colors<-c("setosa"="brown",
+                  "versicolor" = "grey",
+                  "viginica" = "orange")
+boxplot(
+  Sepal.Length~Species,
+  data = iris,
+  col = species_colors,
+  main = "Sepal Length by Species(Custom Color Palette)"
 )
 
-# Plot
-ggplot(iris_long, aes(x = Species, y = Value, fill = Measurement)) +
-  stat_summary(
-    fun = mean,
-    geom = "bar",
-    position = "stack"
-  ) +
-  labs(
-    title = "Stacked Bar Chart of Mean Measurements (Iris)",
-    y = "Mean Value"
-  ) +
+library(ggplot2)
+
+ggplot(iris,
+       aes(x=Species,y=Sepal.Length))+
+  geom_boxplot()
+
+#Colored box plot by species
+ggplot(iris,aes(x=Species,y=Sepal.Length,fill=Species))+
+  geom_boxplot()+
   theme_minimal()
+
+#Using Manual Color Palettes
+ggplot(iris,aes(x=Species,y=Sepal.Length,fill=Species))+
+  geom_boxplot()+
+  scale_fill_manual(
+    values = c(
+      "setosa" = "red",
+      "versicolor" = "green",
+      "viginica" = "blue"
+    )
+  )
